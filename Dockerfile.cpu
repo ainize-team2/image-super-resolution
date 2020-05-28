@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:1.13.1-py3
+FROM tensorflow/tensorflow:2.0.1-py3
 
 # Install system packages
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -25,6 +25,11 @@ COPY setup.py ./
 
 RUN pip install --upgrade pip
 RUN pip install -e .
+RUN pip3 install flask 
+RUN pip3 install requests
+RUN pip3 install flask_cors
 
 ENV PYTHONPATH ./ISR/:$PYTHONPATH
-ENTRYPOINT ["sh", "./scripts/entrypoint.sh"]
+COPY src ./src
+RUN mkdir ./src/images
+ENTRYPOINT python3 ./src/server.py 
