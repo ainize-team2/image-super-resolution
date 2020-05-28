@@ -107,6 +107,7 @@ class RDN(ImageModel):
         if weights:
             weights_path = tf.keras.utils.get_file(fname=fname, origin=url)
             self.model.load_weights(weights_path)
+            # self.model._make_predict_function()
     
     def _upsampling_block(self, input_layer):
         """ Upsampling block for old weights. """
